@@ -26,7 +26,7 @@ object G {
       }
   }
 
-  def output_matrix(g: G.Graph): Unit = {
+  def output_matrix(g: Graph): Unit = {
     Range(0, g.length).foreach(i =>
       println(
         s"$i ${Range(0, g.length)
@@ -36,7 +36,7 @@ object G {
     )
   }
 
-  def is_connected(g: G.Graph, i: Int, j: Int): Boolean = {
+  def is_connected(g: Graph, i: Int, j: Int): Boolean = {
     val neighbors_i = g(i)
     try {  // neigobors_i は整順化されているので、以下では二分法で検索している
       var k1 = 0; var k2 = neighbors_i.length - 1
