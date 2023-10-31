@@ -227,27 +227,40 @@ object Topological {
   }
 }
 
-@main def main() = {
-  {
-    val g = G.load("data/undirected.csv")
-    G.output(g)
+@main def ex1_io() = {
+  val g = G.load("data/undirected.csv")
+  println("隣接リスト形式")
+  G.output(g)
+  println()
+  println("マトリックス形式")
+  G.output_matrix(g)
+}
 
-    print("Visiting by DFS-rec:     "); Traversal.depth_first_rec(g, 0, print _); println()
-    print("Visiting by DFS (stack): "); Traversal.depth_first(g, 0, print _); println()
+@main def ex2_traverse() = {
+  val g = G.load("data/undirected.csv")
+  G.output(g)
 
-    print("Visiting by BFS (queue): "); Traversal.breadth_first(g, 0, print _); println()
-  }
+  print("Visiting by DFS-rec:     "); Traversal.depth_first_rec(g, 0, print _); println()
+  print("Visiting by DFS (stack): "); Traversal.depth_first(g, 0, print _); println()
 
-  {
-    val g = G.load("data/directed.csv")
-    G.output(g)
-    println(s"Distances from vertex 0: ${Distance.breadth_first(g, 0)}")
-    println(s"Distances from vertex 1: ${Distance.breadth_first(g, 1)}")
-    println(s"0-7 path: ${Search.depth_first(g, 0, 7)}")
-    println(s"7-0 path: ${Search.depth_first(g, 7, 0)}")
+  print("Visiting by BFS (queue): "); Traversal.breadth_first(g, 0, print _); println()
+}
 
-    println("Depth-first search over a directed graph (data/directed.csv)")
-    Topological.traverse(g)
-    println(Topological.sort(g).map(_.toString).mkString(", "))
-  }
+@main def ex3_distances() = {
+  val g = G.load("data/directed.csv")
+  G.output(g)
+
+  println(s"Distances from vertex 0: ${Distance.breadth_first(g, 0)}")
+  println(s"Distances from vertex 1: ${Distance.breadth_first(g, 1)}")
+  println(s"0-7 path: ${Search.depth_first(g, 0, 7)}")
+  println(s"7-0 path: ${Search.depth_first(g, 7, 0)}")
+}
+
+@main def ex4_topological_sort() = {
+  val g = G.load("data/directed.csv")
+  G.output(g)
+
+  println("Depth-first search over a directed graph (data/directed.csv)")
+  Topological.traverse(g)
+  println(Topological.sort(g).map(_.toString).mkString(", "))
 }
